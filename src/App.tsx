@@ -1,28 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Container from '@mui/material/Container';
-import { RouterProvider } from 'react-router-dom';
+import { RouterProvider, useLocation } from 'react-router-dom';
 import router from '@src/routes/router';
 import Header from './components/main/Header';
 import Footer from './components/main/Footer';
 
 const sections = [
-  { title: 'React+Typescript 공부노트', url: '#' },
-  { title: 'Python+Fastapi 공부노트', url: '#' },
-  { title: '서버+DB 공부노트', url: '#' },
-  { title: 'Bigdata + AI 공부노트', url: '#' },
+  { title: 'Dashboard 연습 페이지', url: 'dashboard' },
+  { title: 'Chatbot 연습 페이지', url: 'chatbot' },
+  { title: 'Blog 게시판 페이지', url: 'blog' },
+  { title: '부동산 알리미 페이지', url: 'apt' },
+  { title: '관리자 페이지', url: 'admin' },
 ];
 
 function App() {
   const [count, setCount] = useState(0);
+  // const location = useLocation();
+  useEffect(() => {
+    console.log('useEffect 사용...');
+    console.log('url : ', window.location.href);
+  });
   return (
     <>
       <Container maxWidth="lg">
-        {true && <Header title="성현's 잡동사니" sections={sections} />}
+        {window.location.href.includes('login') || (
+          <Header title="성현's 잡동사니" sections={sections} />
+        )}
         <main>
           <RouterProvider router={router} />
         </main>
-        {true && (
+        {window.location.href.includes('login') || (
           <Footer
             title="Footer"
             description="Something here to give the footer a purpose!"
