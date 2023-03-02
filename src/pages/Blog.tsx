@@ -6,12 +6,10 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Header from './Header';
-import MainFeaturedPost from './MainFeaturedPost';
-import FeaturedPost from './FeaturedPost';
-import Main from './Main';
-import Sidebar from './Sidebar';
-import Footer from './Footer';
+import MainFeaturedPost from '@components/blog/MainFeaturedPost';
+import FeaturedPost from '@components/blog/FeaturedPost';
+import Main from '@components/blog/Main';
+import Sidebar from '@components/blog/Sidebar';
 // import post1 from './blog-post.1.md';
 // import post2 from './blog-post.2.md';
 // import post3 from './blog-post.3.md';
@@ -83,7 +81,7 @@ const theme = createTheme();
 export default function Blog() {
   return (
     <ThemeProvider theme={theme}>
-      <Header title="성현's 공부노트 블로그" sections={sections} />
+      {/* <Header title="성현's 공부노트 블로그" sections={sections} /> */}
       <main>
         <MainFeaturedPost post={mainFeaturedPost} />
         <Grid container spacing={4}>
@@ -101,10 +99,10 @@ export default function Blog() {
           />
         </Grid>
       </main>
-      <Footer
+      {/* <Footer
         title="Footer"
         description="Something here to give the footer a purpose!"
-      />
+      /> */}
     </ThemeProvider>
   );
 }
