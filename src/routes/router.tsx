@@ -1,8 +1,8 @@
 import Blog from '@src/pages/Blog';
 import Login from '@src/pages/Login';
 import About from '@src/pages/About';
-import { createBrowserRouter } from 'react-router-dom';
 import Error from '@src/pages/Error';
+import { createBrowserRouter } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {

@@ -6,6 +6,11 @@ import router from '@src/routes/router';
 import Header from './components/main/Header';
 import Footer from './components/main/Footer';
 
+interface User {
+  id: number;
+  name: string;
+}
+
 const sections = [
   { title: 'Dashboard 연습 페이지', url: 'dashboard' },
   { title: 'Chatbot 연습 페이지', url: 'chatbot' },
@@ -15,12 +20,16 @@ const sections = [
 ];
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState<number | null>(0);
+  const [users, setUsers] = useState<User[] | null>(null);
   // const location = useLocation();
   useEffect(() => {
     console.log('useEffect 사용...');
     console.log('url : ', window.location.href);
-  });
+    console.log('Users: ', users);
+
+    return () => console.log('unmointing...');
+  }, []);
   return (
     <>
       <Container maxWidth="lg">
