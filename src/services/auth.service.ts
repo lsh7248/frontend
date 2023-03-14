@@ -1,37 +1,29 @@
 import axios from 'axios';
+import authHeader from '@src/services/auth-header';
+import { API_SERVER_V1, API_SERVICE } from '@src/services/config';
+import { ILogin, ILogout } from '@src/types/Auth';
 
-const API_URL = 'http://localhost:8080/api/auth/';
+const apiAuth = axios.create({
+  baseURL: API_SERVER_V1 + API_SERVICE.auth,
+  headers: {
+    ...authHeader(),
+    'Content-Type': 'application/json',
+  },
+});
 
-export const register = (username: string, email: string, password: string) => {
-  return axios.post(API_URL + 'signup', {
-    username,
-    email,
-    password,
-  });
+const login = async (params: ILogin) => {
+  const response = await apiAuth.post<any>('/login', params);
+  return response.data;
 };
 
-export const login = (username: string, password: string) => {
-  return axios
-    .post(API_URL + 'signin', {
-      username,
-      password,
-    })
-    .then((response) => {
-      if (response.data.accessToken) {
-        localStorage.setItem('user', JSON.stringify(response.data));
-      }
-
-      return response.data;
-    });
+const logout = async (params: ILogout) => {
+  const response = await apiAuth.post<any>('/logout', params);
+  return response.data;
 };
 
-export const logout = () => {
-  localStorage.removeItem('user');
+const AuthService = {
+  login,
+  logout,
 };
 
-export const getCurrentUser = () => {
-  const userStr = localStorage.getItem('user');
-  if (userStr) return JSON.parse(userStr);
-
-  return null;
-};
+export default AuthService;
